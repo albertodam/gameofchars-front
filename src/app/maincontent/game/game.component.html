@@ -1,0 +1,11 @@
+<div class="game-container">
+    <button *ngIf="!gameStarted" (click)="startGame()">Comenzar</button>
+
+    <div *ngIf="gameStarted">
+        <button (click)="selectLevel(1)">Fácil</button>
+        <button (click)="selectLevel(2)">Díficil</button>
+
+        {{charForGame}}
+    </div>
+
+</div>
