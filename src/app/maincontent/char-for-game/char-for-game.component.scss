@@ -1,0 +1,11 @@
+.char {
+    font-size: 110px;
+
+    &.fail-char {
+        color: rgb(143, 10, 10);
+    }
+    
+    &.success-char {
+        color: rgb(13, 88, 17);
+    }
+}
