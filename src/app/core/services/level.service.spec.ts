@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { LevelService } from './level.service';
+import { RoundService } from './round.service';
 
 describe('LevelService', () => {
-  let service: LevelService;
+  let service: RoundService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(LevelService);
+    service = TestBed.inject(RoundService);
   });
 
   it('should be created', () => {

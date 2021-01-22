@@ -1,11 +1,32 @@
 .header-container {
-    background-color: whitesmoke;
     height: 45px;
-    margin-left: -8px;
-    margin-right: -8px;
-    margin-top: -8px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: 0 10px;
-    color: rgb(16, 14, 19);
+    position: absolute;
+    left: 0;
+    right: 0;
+    a {
+        font-size: 1.2em;
+        color: white !important;
+        &:hover{
+            cursor: pointer;
+        }
+
+        &+a,&+span {
+            margin-left: 15px;
+        }
+    }
+
+    .login-github{
+        background: white;
+        color: rgb(16, 14, 19);
+        padding: 8px 5px;
+        border-radius: 8px;
+        &:hover{
+            cursor: pointer;
+        }
+    }
+    
 }

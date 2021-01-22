@@ -5,7 +5,7 @@ import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'game',
+    path: '',
     loadChildren: () => import('./maincontent/maincontent.module').then(m => m.MaincontentModule)
   }
 ];
