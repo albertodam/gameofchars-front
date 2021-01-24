@@ -17,13 +17,13 @@ export class CharForGameComponent implements OnInit {
   roundResult: RoundResult;
   @Output() roundStatus = new EventEmitter<RoundResult>();
   @Input() actualRound: Round;
-  @HostListener('document:keydown', ['$event'])
+  @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
 
     if (this.success) {
       return;
     }
-    console.log(event.key);
+    
     if (this.charForGame === event.key) {
       const time = Date.now() - this.startTime;
       this.roundResult.time = time / 1000;
