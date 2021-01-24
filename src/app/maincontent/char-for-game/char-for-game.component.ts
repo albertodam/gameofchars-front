@@ -19,20 +19,20 @@ export class CharForGameComponent implements OnInit {
   @Input() actualRound: Round;
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-    
-    if(this.success){
+
+    if (this.success) {
       return;
     }
-
-    if(this.charForGame === event.key) {
-      const time = Date.now() - this.startTime
-      this.roundResult.time = time/1000;
+    console.log(event.key);
+    if (this.charForGame === event.key) {
+      const time = Date.now() - this.startTime;
+      this.roundResult.time = time / 1000;
       this.roundResult.score = this.actualRound.startScore - time;
       this.success = true;
       this.fail = false;
       this.roundStatus.emit(this.roundResult);
-    }else{
-      console.log("Fallaste!")
+    } else {
+      console.log('Fallaste!');
       this.fail = true;
     }
 
