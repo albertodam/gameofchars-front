@@ -17,7 +17,7 @@ export class CharForGameComponent implements OnInit {
   roundResult: RoundResult;
   @Output() roundStatus = new EventEmitter<RoundResult>();
   @Input() actualRound: Round;
-  @HostListener('document:keypress', ['$event'])
+  @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
 
     if (this.success) {
