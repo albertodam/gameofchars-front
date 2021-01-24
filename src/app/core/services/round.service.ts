@@ -11,16 +11,16 @@ export class RoundService {
   constructor() {
 
     this.rounds = [
-      new Round(1000, '1234567890'),
-      new Round(1000, 'abcdefghijklmnopqrstuvwxz1234567890'),
-      new Round(900, 'abcdefghijklmnopqrstuvwxz1234567890'),
-      new Round(1200, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890'),
-      new Round(1500, '%$&\'@,.-_/()=!<>{}[]'),
-      new Round(1600, '^¬|€Ç'),
-      new Round(1600, '^¬|€Ç%$&\'@,.-_/()=!<>{}[]'),
-      new Round(1600, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890^¬|€Ç%$&\'@,.-_/()=!<>{}[]'),
-      new Round(700, 'estoesunarondaderegalo,disfrutala'),
-      new Round(400, 'a'),
+      new Round(1500, '1234567890'),
+      new Round(1500, 'abcdefghijklmnopqrstuvwxz1234567890'),
+      new Round(1500, 'abcdefghijklmnopqrstuvwxz1234567890'),
+      new Round(1700, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890'),
+      new Round(2000, '%$&\'@,.-_/()=!<>{}[]'),
+      new Round(2000, '^¬|€Ç'),
+      new Round(2200, '^¬|€Ç%$&\'@,.-_/()=!<>{}[]'),
+      new Round(2200, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890^¬|€Ç%$&\'@,.-_/()=!<>{}[]'),
+      new Round(1200, 'estoesunarondaderegalo,disfrutala'),
+      new Round(500, 'a'),
     ];
 
   }
