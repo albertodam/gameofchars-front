@@ -2,12 +2,13 @@
     <button *ngIf="!gameStarted" (click)="startGame()">Comenzar</button>
 
     <div class="round-container" *ngIf="gameStarted">
-        <span class="round">Ronda {{round+1}}</span>
+        <span class="round">Ronda {{nRound+1}}</span>
 
         <div class="round-finish-wrapper">
             <div *ngIf="roundFinish" class="round-finish">
                 <span class="info-round">tiempo: {{timeResult}}s | puntuación: {{score}}</span>
-                <button>Siguiente ⚔️</button>
+                <button *ngIf="!gameFinished" (click)="nextLevel()">Siguiente ⚔️</button>
+                <button *ngIf="gameFinished" [routerLink]="['/result']" >Fin ⚔️</button>
             </div>
         </div>
         <div class="game-char">
@@ -17,16 +18,8 @@
 
 
         <div class="round-paginator">
-            <span class="round-indicator completed"></span>
-            <span class="round-indicator completed"></span>
-            <span class="round-indicator actual"></span>
-            <span class="round-indicator"></span>
-            <span class="round-indicator"></span>
-            <span class="round-indicator"></span>
-            <span class="round-indicator"></span>
-            <span class="round-indicator"></span>
-            <span class="round-indicator"></span>
-            <span class="round-indicator"></span>
+            <span *ngFor="let round of rounds; let i = index" class="round-indicator" [ngClass]="{'actual': nRound == i, 'completed': nRound > i }"></span>
+           
         </div>
     </div>
 

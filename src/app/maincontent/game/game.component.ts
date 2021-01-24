@@ -13,35 +13,52 @@ export class GameComponent implements OnInit {
   gameStarted: boolean;
   roundFinish: boolean;
   countDownChar: string;
-  round: number;
+  nRound: number;
   showCharComponent: boolean;
   timeResult: number;
   score: number;
   actualRound: Round;
-
+  rounds: Round[];
+  gameFinished: boolean;
+  roundResult: RoundResult[] = [];
   constructor(private readonly roundService: RoundService) {
-    this.round = 0;
+    this.nRound = 0;
+    this.rounds = this.roundService.getRounds();
   }
 
   ngOnInit(): void {
 
   }
 
-  startGame() {
+  startGame(): void {
     this.gameStarted = !this.gameStarted;
     this.startCountdown();
   }
 
-  roundStatus(data: RoundResult): void{
-      this.timeResult = data.time;
-      this.score = data.score;
-      this.roundFinish = true;
+  roundStatus(data: RoundResult): void {
+    if (this.isLastRound()) {
+      this.gameFinished = true;
+    }
+    this.roundService.addRoundResult(data);
+    this.timeResult = data.time;
+    this.score = data.score;
+    this.roundFinish = true;
+  }
+
+  nextLevel(): void {
+    if (this.isLastRound()) {
+      return;
+    }
+    this.nRound++;
+    this.roundFinish = false;
+    this.showCharComponent = false;
+    this.startCountdown();
   }
 
   private showChar(): void {
     setTimeout(() => {
-      this.actualRound = this.roundService.getLevel(this.round);
-      this.showCharComponent = true;    
+      this.actualRound = this.roundService.getLevel(this.nRound);
+      this.showCharComponent = true;
     }, Math.floor(Math.random() * 5) * 1000);
 
   }
@@ -58,6 +75,10 @@ export class GameComponent implements OnInit {
       }
 
     }, 1000);
+  }
+
+  private isLastRound(): boolean{
+    return this.nRound === (this.rounds.length - 1);
   }
 
 }

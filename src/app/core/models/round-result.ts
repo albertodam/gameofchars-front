@@ -1,4 +1,4 @@
 export class RoundResult {
     time: number;
-    score: number;    
+    score: number;
 }
