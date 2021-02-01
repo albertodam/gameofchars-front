@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './base/header/header.component';
 import { GithubComponent } from './base/github/github.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     HttpClientModule,
   ],
   providers: [
+    PathLocationStrategy,
+    {provide: LocationStrategy, useClass: PathLocationStrategy},
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
