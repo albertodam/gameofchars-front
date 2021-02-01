@@ -21,8 +21,7 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
     HttpClientModule,
   ],
   providers: [
-    PathLocationStrategy,
-    {provide: LocationStrategy, useClass: PathLocationStrategy},
+
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
