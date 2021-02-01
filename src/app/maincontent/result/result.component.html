@@ -2,7 +2,7 @@
   <span class="result-score">Tu puntuación ha sido de <strong>{{scoreTotal}}</strong> puntos.</span>
   <a class="shared-button twitter" target="_blank" href="https://twitter.com/intent/tweet?text={{message}}">
     Compartir en Twitter <i class="fab fa-twitter"></i></a>
-    
-    <a class="shared-button whatsapp" target="_blank" href="whatsapp://send?text={{message}}">
+
+  <a class="shared-button whatsapp" target="_blank" [href]="sanitize('whatsapp://send?text='+message)">
     Compartir en Whatsapp <i class="fab fa-whatsapp"></i></a>
 </div>

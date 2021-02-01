@@ -1,0 +1,13 @@
+<table class="table-score">
+    <thead>
+        <th class="text-right"></th>
+        <th class="text-left">Nombre</th>
+        <th class="text-left">Puntos</th>
+    </thead>
+    <tr *ngFor="let score of scores; let i = index">
+        <td class="text-right"><i class="fas fa-trophy" *ngIf="i < 3"
+                [ngClass]="{'first': i === 0 , 'second': i === 1, 'third': i === 2}"></i></td>
+        <td>{{score.name}}</td>
+        <td>{{score.score}}</td>
+    </tr>
+</table>

@@ -1,3 +1,6 @@
+import { environment } from './../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Round } from './../models/round';
 import { Injectable } from '@angular/core';
 import { RoundResult } from '../models/round-result';
@@ -8,7 +11,7 @@ import { RoundResult } from '../models/round-result';
 export class RoundService {
   private rounds: Round[];
   private roundsResult: RoundResult[] = [];
-  constructor() {
+  constructor(private readonly http: HttpClient) {
 
     this.rounds = [
       new Round(1500, '1234567890'),
@@ -41,7 +44,8 @@ export class RoundService {
     return this.rounds[round];
   }
 
-  finishGame(): void {
+  finishGame(score: number): Observable<any> {
     this.roundsResult = [];
+    return this.http.post(`${environment.url_backend}/game`, { score });
   }
 }

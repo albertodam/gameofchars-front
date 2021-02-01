@@ -7,26 +7,47 @@
     position: absolute;
     left: 0;
     right: 0;
-    a {
-        font-size: 1.2em;
-        color: white !important;
-        &:hover{
-            cursor: pointer;
-        }
+    top: 0;
+   
 
-        &+a,&+span {
-            margin-left: 15px;
-        }
-    }
+    .rrss-container {
+        display: flex;
+        align-items: center;
 
-    .login-github{
-        background: white;
-        color: rgb(16, 14, 19);
-        padding: 8px 5px;
-        border-radius: 8px;
-        &:hover{
-            cursor: pointer;
-        }
-    }
+        a {
+            font-size: 1.2em;
+            color: white !important;
+            &:hover {
+                cursor: pointer;
+            }
     
+            & + a,
+            & + span, & + .user-info {
+                margin-left: 15px;
+            }
+        }
+
+        .login-github {
+            background: white;
+            color: rgb(16, 14, 19);
+            padding: 8px 5px;
+            border-radius: 8px;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    
+        .user-info {
+            display:flex;
+            align-items: center;
+            img {
+                border-radius: 50%;
+                width: 30px;
+                height: 30px;
+            }
+            span {
+                padding: 5px;
+            }
+        }
+    }
 }

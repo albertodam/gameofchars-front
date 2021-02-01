@@ -1,0 +1,21 @@
+.table-score {
+    margin-top: 30px;
+    border-radius: 5px;
+    padding: 15px 5px;
+    width: 700px;
+    background: rgba(255, 255, 255, 0.1);
+
+    td,
+    thead {
+        padding: 5px;
+    }
+    .first {
+        color: #ffd700;
+    }
+    .second {
+        color: #e3e4e5;
+    }
+    .third {
+        color: #cd7f32;
+    }
+}

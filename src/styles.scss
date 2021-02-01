@@ -39,8 +39,14 @@ body {
         &.whatsapp {
             background-color: #00bfa5;
             &:hover {
-                background-color:#00a790;
+                background-color: #00a790;
             }
         }
+    }
+    .text-left {
+        text-align: left;
+    }
+    .text-right {
+        text-align: right;
     }
 }

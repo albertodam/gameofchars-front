@@ -6,11 +6,12 @@ import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CharForGameComponent } from './char-for-game/char-for-game.component';
 import { ResultComponent } from './result/result.component';
+import { ScoretableComponent } from './scoretable/scoretable.component';
 
 
 
 @NgModule({
-  declarations: [GameComponent, ScoreboardComponent, DashboardComponent, CharForGameComponent, ResultComponent],
+  declarations: [GameComponent, ScoreboardComponent, DashboardComponent, CharForGameComponent, ResultComponent, ScoretableComponent],
   imports: [
     MainContentRoutingModule,
     CommonModule

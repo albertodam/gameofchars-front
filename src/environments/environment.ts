@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  client_id: '1bf7f43bc58c31677bbe',
+  github_redirect_url: 'http://localhost:4200/github',
+  url_backend: ''
 };
 
 /*
