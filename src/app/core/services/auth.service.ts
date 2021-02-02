@@ -14,4 +14,8 @@ export class AuthService {
     return this.http.post(`${environment.url_backend}/auth/github`, { code });
   }
 
+  anonymousToken(): Observable<any> {
+    return this.http.post(`${environment.url_backend}/auth/anonymous`,{});
+  }
+
 }
