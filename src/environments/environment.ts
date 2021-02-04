@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  client_id: '1bf7f43bc58c31677bbe',
+  client_id: '62efb4091773d4645623',
   github_redirect_url: 'http://localhost:4200/github',
   url_backend: ''
 };

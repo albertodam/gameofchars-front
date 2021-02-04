@@ -21,6 +21,7 @@ export class ScoretableComponent implements OnInit {
 
     this.gameService.getScores().subscribe(scores => {
       this.scores = scores;
+      console.log(scores);
       this.fillScores();
     });
   }
