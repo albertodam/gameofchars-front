@@ -60,7 +60,15 @@
                   "maximumError": "10kb"
                 }
               ]
-            }
+            },
+            "pre": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.pre.ts"
+                }
+              ]
+            },
           }
         },
         "serve": {
@@ -124,6 +132,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "gameofchars-front"
 }
