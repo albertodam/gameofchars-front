@@ -1,6 +1,6 @@
 import { SocketService } from './../../core/services/socket.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ulid } from 'ulid';
 
 @Component({
@@ -13,7 +13,9 @@ export class LobbyComponent implements OnInit {
   gameId: string;
   nUsers: number;
   messages: any[];
+  isCreator: boolean;
   constructor(
+    private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly socketService: SocketService) {
 
@@ -23,7 +25,7 @@ export class LobbyComponent implements OnInit {
     this.socketService.socket.on('userJoinned', (data) => {
       console.log(data);
       this.messages.push(data);
-      this.nUsers = data.game;
+      this.nUsers = data.game.nUsers;
     });
 
     this.socketService.socket.on('userLeave', (data) => {
@@ -32,14 +34,16 @@ export class LobbyComponent implements OnInit {
       this.nUsers = data.game;
     });
 
+    this.socketService.socket.on('startGame', (data) => {
+      this.router.navigateByUrl('/game');
+    });
+
     this.route.queryParams.subscribe(params => {
       if (params.gameId) {
-        //TODO join game
         this.joinGame(params.gameId);
       } else {
         this.createGame();
       }
-      console.log(params.gameId);
     });
 
   }
@@ -48,6 +52,9 @@ export class LobbyComponent implements OnInit {
 
   }
 
+  startGame(): void {
+    this.socketService.socket.emit('startingGame', this.gameId);
+  }
 
   private joinGame(gameId: string): void {
     this.gameId = gameId;
@@ -58,6 +65,7 @@ export class LobbyComponent implements OnInit {
     const gameId = ulid();
     this.gameId = gameId;
     this.socketService.socket.emit('createGame', gameId);
+    this.isCreator = true;
   }
 
 }

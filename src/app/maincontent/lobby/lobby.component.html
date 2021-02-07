@@ -1,4 +1,5 @@
 <div class="lobby-container">
+    <button *ngIf="isCreator" (click)="startGame()">Empezar partida</button>
     <span>Usuario en la sala: {{ nUsers}}</span>
     <span>Id de la partida: {{gameId}}</span>
     <div>
