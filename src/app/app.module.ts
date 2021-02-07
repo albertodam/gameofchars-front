@@ -1,13 +1,13 @@
-import { TokenInterceptor } from './core/interceptor/token.interceptor';
-import { BrowserModule } from '@angular/platform-browser';
+import { SocketService } from './core/services/socket.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-
+import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './base/header/header.component';
 import { GithubComponent } from './base/github/github.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { HeaderComponent } from './base/header/header.component';
+import { TokenInterceptor } from './core/interceptor/token.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +21,7 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
     HttpClientModule,
   ],
   providers: [
-
+    
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
@@ -30,4 +30,6 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private readonly socketService: SocketService){}
+ }

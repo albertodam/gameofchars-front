@@ -2,7 +2,7 @@ import { CommunicationService } from './../../core/services/communication.servic
 import { UserLogged } from '../../core/models/user-logged';
 import { environment } from '../../../environments/environment';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { io } from 'socket.io-client';
+
 
 @Component({
   selector: 'app-header',
@@ -11,21 +11,27 @@ import { io } from 'socket.io-client';
 })
 export class HeaderComponent implements OnInit {
   userLogged: UserLogged;
-  socket: any;
+
 
   constructor(private readonly commuService: CommunicationService) {
     this.commuService.loginEvent.subscribe(() => {
       this.setUser();
     });
 
-    this.socket = io("http://localhost:3000");
-
   }
 
   ngOnInit(): void {
 
     this.setUser();
+    // this.socket.on('respuesta',(data)=>{
+    //   console.log('Me han hablado desde otro lado');
+    //   console.log(data);
+    // })
+  }
 
+
+  testSocket(): void {
+  //  this.socket.emit('test', 'Hola soy angular');
   }
 
   setUser(): void {
