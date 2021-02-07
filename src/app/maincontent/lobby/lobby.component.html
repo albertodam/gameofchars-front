@@ -1,1 +1,7 @@
-<p>lobby works!</p>
+<div class="lobby-container">
+    <span>Usuario en la sala: {{ nUsers}}</span>
+    <span>Id de la partida: {{gameId}}</span>
+    <div>
+        <span *ngFor="let message of messages">{{message | json}}</span>
+    </div>
+</div>

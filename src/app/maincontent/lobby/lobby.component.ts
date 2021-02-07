@@ -10,21 +10,54 @@ import { ulid } from 'ulid';
 })
 export class LobbyComponent implements OnInit {
   socket: any;
-
+  gameId: string;
+  nUsers: number;
+  messages: any[];
   constructor(
     private readonly route: ActivatedRoute,
     private readonly socketService: SocketService) {
-    const gameId = ulid();
-    socketService.socket.emit('createGame', gameId);
+
+    this.messages = [];
+    this.nUsers = 1;
+
+    this.socketService.socket.on('userJoinned', (data) => {
+      console.log(data);
+      this.messages.push(data);
+      this.nUsers = data.game;
+    });
+
+    this.socketService.socket.on('userLeave', (data) => {
+      console.log(data);
+      this.messages.push(data);
+      this.nUsers = data.game;
+    });
 
     this.route.queryParams.subscribe(params => {
-      console.log(params.gameId);   
+      if (params.gameId) {
+        //TODO join game
+        this.joinGame(params.gameId);
+      } else {
+        this.createGame();
+      }
+      console.log(params.gameId);
     });
 
   }
 
   ngOnInit(): void {
 
+  }
+
+
+  private joinGame(gameId: string): void {
+    this.gameId = gameId;
+    this.socketService.socket.emit('joinGame', gameId);
+  }
+
+  private createGame(): void {
+    const gameId = ulid();
+    this.gameId = gameId;
+    this.socketService.socket.emit('createGame', gameId);
   }
 
 }
