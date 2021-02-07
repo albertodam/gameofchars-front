@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { io } from 'socket.io-client';
 
@@ -9,6 +10,6 @@ export class SocketService {
 
   constructor() {
     console.log("iniciando socket");
-    this.socket = io("http://localhost:3000");
+    this.socket = io(environment.url_backend);
    }
 }
