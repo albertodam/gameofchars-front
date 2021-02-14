@@ -1,7 +1,7 @@
 import { Game } from './../../core/models/game';
 import { SocketService } from './../../core/services/socket.service';
 import { Round } from './../../core/models/round';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 
 import { RoundResult } from '../../core/models/round-result';
 import { RoundService } from '../../core/services/round.service';
@@ -26,6 +26,22 @@ export class GameComponent implements OnInit {
   roundResult: RoundResult[] = [];
   multiplayer: { id: any; };
   players: any;
+
+
+  @HostListener('document:keypress', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+
+    if (!this.roundFinish) {
+      return;
+    }
+    console.log(event.key);
+    if (event.key === 'Enter') {
+      this.nextLevel();
+    }
+
+  }
+
+
   constructor(
     private readonly socketService: SocketService,
     private readonly route: ActivatedRoute,
