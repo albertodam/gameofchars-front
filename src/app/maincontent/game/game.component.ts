@@ -1,8 +1,11 @@
+import { Game } from './../../core/models/game';
+import { SocketService } from './../../core/services/socket.service';
 import { Round } from './../../core/models/round';
 import { Component, OnInit } from '@angular/core';
 
 import { RoundResult } from '../../core/models/round-result';
 import { RoundService } from '../../core/services/round.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-game',
@@ -21,24 +24,54 @@ export class GameComponent implements OnInit {
   rounds: Round[];
   gameFinished: boolean;
   roundResult: RoundResult[] = [];
-  constructor(private readonly roundService: RoundService) {
+  multiplayer: { id: any; };
+  players: any;
+  constructor(
+    private readonly socketService: SocketService,
+    private readonly route: ActivatedRoute,
+    private readonly roundService: RoundService
+  ) {
     this.nRound = 0;
     this.rounds = this.roundService.getRounds();
+    this.route.queryParams.subscribe(params => {
+      if (params.m) {
+        this.multiplayer = {
+          id: params.m
+        };
+        this.players = JSON.parse(localStorage.getItem('game')).players;
+
+        this.socketService.socket.on('playerFinishedRound', (game: Game) => {
+          console.log(game);
+          this.players = game.players.sort((player1, player2) => {
+            return player1.score > player2.score ? -1 : 1;
+          });
+        });
+      }
+    });
   }
 
   ngOnInit(): void {
-
+    this.gameStarted = !this.gameStarted;
+    this.startCountdown();
   }
 
   startGame(): void {
-    this.gameStarted = !this.gameStarted;
-    this.startCountdown();
+
   }
 
   roundStatus(data: RoundResult): void {
     if (this.isLastRound()) {
       this.gameFinished = true;
     }
+
+    if (this.multiplayer) {
+      const finishRound = {
+        gameId: this.multiplayer.id,
+        score: data.score
+      };
+      this.socketService.socket.emit('finishPlayerRound', finishRound);
+    }
+
     this.roundService.addRoundResult(data);
     this.timeResult = data.time;
     this.score = data.score;
@@ -77,7 +110,7 @@ export class GameComponent implements OnInit {
     }, 1000);
   }
 
-  private isLastRound(): boolean{
+  private isLastRound(): boolean {
     return this.nRound === (this.rounds.length - 1);
   }
 

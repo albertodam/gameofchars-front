@@ -1,17 +1,19 @@
-import { LobbyComponent } from './lobby/lobby.component';
+import { GameComponent } from './game/game.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { GameComponent } from './../maincontent/game/game.component';
-import { MultiplayerComponent } from './multiplayer/multiplayer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { LobbyComponent } from './lobby/lobby.component';
+import { MultiplayerMenuComponent } from './multiplayer-menu/multiplayer-menu.component';
 import { ResultComponent } from './result/result.component';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
+import { SingleGameComponent } from './single-game/single-game.component';
 
 
 const routes: Routes = [
   {path: '', component: DashboardComponent},
+  {path: 'single-game', component: SingleGameComponent},
+  {path: 'multiplayer-menu', component: MultiplayerMenuComponent},
   {path: 'game', component: GameComponent},
-  {path: 'multiplayer', component: MultiplayerComponent},
   {path: 'lobby', component: LobbyComponent},
   {path: 'scoreboard', component: ScoreboardComponent},
   {path: 'result', component: ResultComponent},

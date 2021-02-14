@@ -1,13 +1,13 @@
-import { SocketService } from './core/services/socket.service';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GithubComponent } from './base/github/github.component';
 import { HeaderComponent } from './base/header/header.component';
 import { TokenInterceptor } from './core/interceptor/token.interceptor';
-
+import { SocketService } from './core/services/socket.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,7 @@ import { TokenInterceptor } from './core/interceptor/token.interceptor';
     HttpClientModule,
   ],
   providers: [
-    
+
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
@@ -31,5 +31,5 @@ import { TokenInterceptor } from './core/interceptor/token.interceptor';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(private readonly socketService: SocketService){}
- }
+  constructor(private readonly socketService: SocketService) { }
+}

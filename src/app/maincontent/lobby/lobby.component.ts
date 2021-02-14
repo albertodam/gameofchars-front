@@ -1,7 +1,8 @@
-import { SocketService } from './../../core/services/socket.service';
+import { Game } from './../../core/models/game';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ulid } from 'ulid';
+import { SocketService } from './../../core/services/socket.service';
 
 @Component({
   selector: 'app-lobby',
@@ -14,28 +15,25 @@ export class LobbyComponent implements OnInit {
   nUsers: number;
   messages: any[];
   isCreator: boolean;
+  game: Game;
   constructor(
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly socketService: SocketService) {
 
-    this.messages = [];
-    this.nUsers = 1;
+    this.nUsers = 0;
 
-    this.socketService.socket.on('userJoinned', (data) => {
-      console.log(data);
-      this.messages.push(data);
-      this.nUsers = data.game.nUsers;
+    this.socketService.socket.on('userJoinned', (game: Game) => {
+      this.nUsers = game.players.length;
     });
 
-    this.socketService.socket.on('userLeave', (data) => {
-      console.log(data);
-      this.messages.push(data);
-      this.nUsers = data.game;
+    this.socketService.socket.on('userLeave', (game: Game) => {
+      this.nUsers = game.players.length;
     });
 
-    this.socketService.socket.on('startGame', (data) => {
-      this.router.navigateByUrl('/game');
+    this.socketService.socket.on('startGame', (game) => {
+      localStorage.setItem('game', JSON.stringify(game));
+      this.router.navigateByUrl('/game?m=' + this.gameId);
     });
 
     this.route.queryParams.subscribe(params => {
@@ -57,15 +55,22 @@ export class LobbyComponent implements OnInit {
   }
 
   private joinGame(gameId: string): void {
-    this.gameId = gameId;
-    this.socketService.socket.emit('joinGame', gameId);
+    this.socketService.socket.emit('joinGame', this.getInfoGame(gameId));
   }
 
   private createGame(): void {
-    const gameId = ulid();
-    this.gameId = gameId;
-    this.socketService.socket.emit('createGame', gameId);
+    const gameInfo = this.getInfoGame(ulid());
+    console.log(gameInfo);
+    this.socketService.socket.emit('createGame', gameInfo);
     this.isCreator = true;
+  }
+
+  private getInfoGame(gameId: string): any {
+    this.gameId = gameId;
+    return {
+      gameId,
+      username: localStorage.getItem('musername')
+    };
   }
 
 }
