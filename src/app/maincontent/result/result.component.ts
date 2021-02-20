@@ -1,3 +1,4 @@
+import { Player } from './../../core/models/player';
 import { Game } from './../../core/models/game';
 import { CommunicationService } from './../../core/services/communication.service';
 import { UserLogged } from './../../core/models/user-logged';
@@ -17,7 +18,7 @@ export class ResultComponent implements OnInit {
   scoreTotal: number;
   message: string;
   multiplayer: boolean;
-  scoreBoard: import("c:/Users/ateje/source/gameofchars-front/src/app/core/models/player").Player[];
+  scoreBoard: Player[];
   constructor(
     private readonly commuService: CommunicationService,
     private readonly authService: AuthService,
