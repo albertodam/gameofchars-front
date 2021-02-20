@@ -1,11 +1,10 @@
-import { Game } from './../../core/models/game';
-import { SocketService } from './../../core/services/socket.service';
-import { Round } from './../../core/models/round';
-import { Component, OnInit, HostListener } from '@angular/core';
-
+import { Component, HostListener, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RoundResult } from '../../core/models/round-result';
 import { RoundService } from '../../core/services/round.service';
-import { ActivatedRoute } from '@angular/router';
+import { Game } from './../../core/models/game';
+import { Round } from './../../core/models/round';
+import { SocketService } from './../../core/services/socket.service';
 
 @Component({
   selector: 'app-game',
@@ -26,7 +25,7 @@ export class GameComponent implements OnInit {
   roundResult: RoundResult[] = [];
   multiplayer: { id: any; };
   players: any;
-
+  allPlayerFinished: boolean;
 
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -41,10 +40,10 @@ export class GameComponent implements OnInit {
 
   }
 
-
   constructor(
     private readonly socketService: SocketService,
     private readonly route: ActivatedRoute,
+    private readonly router: Router,
     private readonly roundService: RoundService
   ) {
     this.nRound = 0;
@@ -56,8 +55,18 @@ export class GameComponent implements OnInit {
         };
         this.players = JSON.parse(localStorage.getItem('game')).players;
 
+        this.socketService.socket.on('finishGame', canFinishGame => {
+          console.log('ha terminado todo el mundo');
+          this.allPlayerFinished = canFinishGame;
+        });
+
+
+        this.socketService.socket.on('finishGameAllPlayer', (result: Game) => {
+          const path = `/result?mr=${btoa(JSON.stringify(result))}`;
+          this.router.navigateByUrl(path);
+        });
+
         this.socketService.socket.on('playerFinishedRound', (game: Game) => {
-          console.log(game);
           this.players = game.players.sort((player1, player2) => {
             return player1.score > player2.score ? -1 : 1;
           });
@@ -78,6 +87,10 @@ export class GameComponent implements OnInit {
   roundStatus(data: RoundResult): void {
     if (this.isLastRound()) {
       this.gameFinished = true;
+
+      if (this.multiplayer) {
+        this.socketService.socket.emit('playerFinishGame', this.multiplayer.id);
+      }
     }
 
     if (this.multiplayer) {
@@ -102,6 +115,15 @@ export class GameComponent implements OnInit {
     this.roundFinish = false;
     this.showCharComponent = false;
     this.startCountdown();
+  }
+
+  finishGame(): void {
+    if (this.multiplayer) {    
+      this.socketService.socket.emit('notifyAllUserFinishGame', this.multiplayer.id);
+    } else {
+      this.router.navigateByUrl('/result');
+    }
+
   }
 
   private showChar(): void {

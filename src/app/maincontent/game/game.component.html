@@ -6,7 +6,7 @@
             <div *ngIf="roundFinish" class="round-finish">
                 <span class="info-round">tiempo: {{timeResult}}s | puntuación: {{score}}</span>
                 <button *ngIf="!gameFinished" (click)="nextLevel()">Siguiente ⚔️</button>
-                <button *ngIf="gameFinished" [routerLink]="['/result']">Fin ⚔️</button>
+                <button *ngIf="(gameFinished && !multiplayer) || (multiplayer && allPlayerFinished)" (click)="finishGame()">Fin ⚔️</button>
             </div>
         </div>
         <div class="game-char">
@@ -25,7 +25,7 @@
 
 </div>
 
-<div class="list-players">
+<div *ngIf="multiplayer" class="list-players">
     <table>
         <thead>
             <td>Jugador</td>

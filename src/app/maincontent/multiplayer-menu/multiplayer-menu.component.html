@@ -1,7 +1,12 @@
-<div class="multiplayer-container">
-    NOMBRE:<br />
-    <input [(ngModel)]="username" />
-    <button (click)="createGame()">Crear partida</button>
-    <input [(ngModel)]="gameId" />
-    <button (click)="joinGame()">Unirse a una partida</button>
+<div class="multiplayer-menu">
+    <div class="multiplayer-container">
+        <div class="game-name">
+            <input [(ngModel)]="username" placeholder="Escribe tu nombre" [disabled]="isUserLogged" />
+        </div>
+        <div class="game-join">            
+            <input [(ngModel)]="gameId" placeholder="Id. de la sala"/>
+        </div>
+        <button (click)="joinGame()" [disabled]="!gameId || !username" >Unirse a una partida</button>
+        <button (click)="createGame()" [disabled]="gameId || !username">Crear partida</button>
+    </div>
 </div>

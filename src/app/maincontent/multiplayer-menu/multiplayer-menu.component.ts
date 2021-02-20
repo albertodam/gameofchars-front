@@ -10,7 +10,14 @@ import { ulid } from 'ulid';
 export class MultiplayerMenuComponent {
   gameId: string;
   username: string;
-  constructor(private readonly router: Router) { }
+  isUserLogged: boolean;
+  constructor(private readonly router: Router) {
+    const user = JSON.parse(localStorage.getItem('userInfo'));
+    if (user) {
+      this.isUserLogged = true;
+      this.username = user.username;
+    }
+  }
 
   createGame(): void {
     localStorage.setItem('musername', this.username);
