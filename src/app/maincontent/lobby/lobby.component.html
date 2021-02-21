@@ -3,7 +3,7 @@
         <div class="players-avatar">
             <div class="player-info" *ngFor="let player of players">
                 <span> {{player.username}}</span>
-                <img height="60" src="https://avatars.dicebear.com/4.5/api/male/{{player.username}}.svg?mood[]=happy">
+                <img height="60" src="{{player.avatar || 'https://avatars.dicebear.com/4.5/api/male/'+player.username+'.svg?mood[]=happy'}}">
             </div>
         </div>
         <span>Usuarios en la sala: {{ nUsers}}</span>

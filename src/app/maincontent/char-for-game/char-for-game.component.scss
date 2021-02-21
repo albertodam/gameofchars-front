@@ -1,41 +1,45 @@
-.char {
-    font-size: 110px;
+.char-wrapper {
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    .char {
+        font-size: 110px;
 
-    &.fail-char {
-        color: rgb(143, 10, 10);
-    }
+        &.fail-char {
+            color: rgb(143, 10, 10);
+        }
 
-    &.success-char {
-        color: rgb(13, 88, 17);
-    }
+        &.success-char {
+            color: rgb(13, 88, 17);
+        }
 
-    &.shake {
-        animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) infinite;
-        transform: translate3d(0, 0, 0);
-        backface-visibility: hidden;
-        perspective: 1000px;
+        &.shake {
+            position: absolute;
+            animation: shake 1.2s ease infinite;
+            transform-origin: 50% 50%;
+        }
     }
 }
 
 @keyframes shake {
     10%,
     90% {
-        transform: translate3d(-1px, -2px, 0);
+        transform: translate3d(-9px, -65px, 0);
     }
 
     20%,
     80% {
-        transform: translate3d(2px, 0, 0);
+        transform: translate3d(20px, 75px, 0);
     }
 
     30%,
     50%,
     70% {
-        transform: translate3d(-4px, -4px, 0);
+        transform: translate3d(-16px, -14px, 0);
     }
 
     40%,
     60% {
-        transform: translate3d(4px, 10px, 0);
+        transform: translate3d(60px, 30px, 0);
     }
 }

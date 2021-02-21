@@ -1,1 +1,3 @@
-<span class="char" [ngClass]="{'fail-char': fail, 'success-char': success}">{{charForGame}}</span>
+<div class="char-wrapper">
+    <span class="char shake" [ngClass]="{'fail-char': fail, 'success-char': success, 'shake': haveTrap}">{{charForGame}}</span>
+</div>

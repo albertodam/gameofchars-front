@@ -1,3 +1,4 @@
+import { SocketService } from './../../core/services/socket.service';
 import { RoundResult } from './../../core/models/round-result';
 import { RoundService } from '../../core/services/round.service';
 import { EventEmitter, HostListener, Input, Output } from '@angular/core';
@@ -17,6 +18,7 @@ export class CharForGameComponent implements OnInit {
   roundResult: RoundResult;
   @Output() roundStatus = new EventEmitter<RoundResult>();
   @Input() actualRound: Round;
+  @Input() haveTrap: boolean;
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
 
@@ -37,7 +39,8 @@ export class CharForGameComponent implements OnInit {
     }
 
   }
-  constructor(private readonly levelService: RoundService) {
+  constructor(private readonly socketService: SocketService) {
+
 
   }
 

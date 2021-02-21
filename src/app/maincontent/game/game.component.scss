@@ -57,9 +57,21 @@
     table {
         td {
             padding: 5px;
+          
         }
 
         tbody {
+
+            td.player-info-cell {
+                display: flex;
+                align-items: center;
+                img{
+                    border-radius: 50%;
+                    margin-right: 2px;
+                }
+            }
+
+
             td.score-cell {
                 text-align: right;
             }

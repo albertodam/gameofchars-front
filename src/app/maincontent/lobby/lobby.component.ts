@@ -70,9 +70,13 @@ export class LobbyComponent implements OnInit {
 
   private getInfoGame(gameId: string): any {
     this.gameId = gameId;
+
+    const { username, avatar } = JSON.parse(localStorage.getItem('userInfo')) || {username:localStorage.getItem('musername'), avatar: ''};
+
     return {
       gameId,
-      username: localStorage.getItem('musername')
+      username,
+      avatar
     };
   }
 

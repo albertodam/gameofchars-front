@@ -11,7 +11,7 @@
         </div>
         <div class="game-char">
             <span class="countdown" *ngIf="!showCharComponent">{{countDownChar}}</span>
-            <app-char-for-game [actualRound]="actualRound" (roundStatus)="roundStatus($event)"
+            <app-char-for-game [actualRound]="actualRound" [haveTrap]="trap" (roundStatus)="roundStatus($event)"
                 *ngIf="showCharComponent"></app-char-for-game>
         </div>
 
@@ -20,6 +20,10 @@
             <span *ngFor="let round of rounds; let i = index" class="round-indicator"
                 [ngClass]="{'actual': nRound == i, 'completed': nRound > i }"></span>
 
+        </div>
+
+        <div class="">
+            <button (click)="sendTrap()">Enviar trampa ⚔️ </button>
         </div>
     </div>
 
@@ -33,7 +37,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let player of players">
-                <td>{{player.username}}</td>
+                <td class="player-info-cell"><img height="25" src="{{player.avatar || 'https://avatars.dicebear.com/4.5/api/male/'+player.username+'.svg?mood[]=happy'}}">{{player.username}}</td>
                 <td class="score-cell">{{player.score || 0}}</td>
             </tr>
         </tbody>

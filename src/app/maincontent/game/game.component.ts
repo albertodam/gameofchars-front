@@ -26,6 +26,7 @@ export class GameComponent implements OnInit {
   multiplayer: { id: any; };
   players: any;
   allPlayerFinished: boolean;
+  trap: any;
 
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -71,6 +72,12 @@ export class GameComponent implements OnInit {
             return player1.score > player2.score ? -1 : 1;
           });
         });
+
+
+        this.socketService.socket.on('sendTrapToPlayer', trap => {
+          this.trap = trap;
+        });
+
       }
     });
   }
@@ -80,8 +87,9 @@ export class GameComponent implements OnInit {
     this.startCountdown();
   }
 
-  startGame(): void {
 
+  sendTrap(): void {
+    this.socketService.socket.emit('sendTrap', this.multiplayer.id);
   }
 
   roundStatus(data: RoundResult): void {
@@ -92,6 +100,8 @@ export class GameComponent implements OnInit {
         this.socketService.socket.emit('playerFinishGame', this.multiplayer.id);
       }
     }
+
+    this.trap = false;
 
     if (this.multiplayer) {
       const finishRound = {
@@ -118,7 +128,7 @@ export class GameComponent implements OnInit {
   }
 
   finishGame(): void {
-    if (this.multiplayer) {    
+    if (this.multiplayer) {
       this.socketService.socket.emit('notifyAllUserFinishGame', this.multiplayer.id);
     } else {
       this.router.navigateByUrl('/result');
