@@ -27,6 +27,7 @@ export class GameComponent implements OnInit {
   players: any;
   allPlayerFinished: boolean;
   trap: any;
+  alreadyUsed: boolean;
 
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -89,6 +90,7 @@ export class GameComponent implements OnInit {
 
 
   sendTrap(): void {
+    this.alreadyUsed = true;
     this.socketService.socket.emit('sendTrap', this.multiplayer.id);
   }
 
@@ -102,7 +104,7 @@ export class GameComponent implements OnInit {
     }
 
     this.trap = false;
-
+    this.alreadyUsed = false;
     if (this.multiplayer) {
       const finishRound = {
         gameId: this.multiplayer.id,

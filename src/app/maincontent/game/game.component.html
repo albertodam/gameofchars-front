@@ -22,7 +22,7 @@
 
         </div>
 
-        <div class="" *ngIf="showCharComponent">
+        <div class="" *ngIf="showCharComponent && !roundFinish && !alreadyUsed">
             <button (click)="sendTrap()">Enviar trampa ⚔️ </button>
         </div>
     </div>
