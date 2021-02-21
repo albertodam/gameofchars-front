@@ -1,3 +1,4 @@
+import { Player } from './../../core/models/player';
 import { Game } from './../../core/models/game';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,6 +17,7 @@ export class LobbyComponent implements OnInit {
   messages: any[];
   isCreator: boolean;
   game: Game;
+  players: Player[];
   constructor(
     private readonly router: Router,
     private readonly route: ActivatedRoute,
@@ -24,6 +26,7 @@ export class LobbyComponent implements OnInit {
     this.nUsers = 0;
 
     this.socketService.socket.on('userJoinned', (game: Game) => {
+      this.players = game.players;
       this.nUsers = game.players.length;
     });
 

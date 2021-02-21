@@ -1,7 +1,26 @@
-.lobby-container {
+.lobby-wrapper {
     display: flex;
-    height: 500px;
     justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    .lobby-container {
+        display: flex;
+        height: 500px;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        .players-avatar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            .player-info {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin: 10px;
+            }
+        }
+        .id-game {
+            font-weight: 200;
+        }
+    }
 }

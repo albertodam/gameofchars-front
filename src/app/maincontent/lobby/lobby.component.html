@@ -1,9 +1,16 @@
-
-<div class="lobby-container">
-    <button *ngIf="isCreator" (click)="startGame()">Empezar partida</button>
-    <span>Usuario en la sala: {{ nUsers}}</span>
-    <span>Id de la partida: {{gameId}}</span>
-    <div>
-        <span *ngFor="let message of messages">{{message | json}}</span>
+<div class="lobby-wrapper">
+    <div class="lobby-container">
+        <div class="players-avatar">
+            <div class="player-info" *ngFor="let player of players">
+                <span> {{player.username}}</span>
+                <img height="60" src="https://avatars.dicebear.com/4.5/api/male/{{player.username}}.svg?mood[]=happy">
+            </div>
+        </div>
+        <span>Usuarios en la sala: {{ nUsers}}</span>
+        <small class="id-game">Id de la partida: {{gameId}}</small>
+        <div>
+            <span *ngFor="let message of messages">{{message | json}}</span>
+        </div>
+        <button *ngIf="isCreator" (click)="startGame()">Empezar partida</button>
     </div>
 </div>
