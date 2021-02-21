@@ -11,7 +11,7 @@ export class GameService {
 
   constructor(private readonly http: HttpClient) { }
 
-  getScores(nScores = 5): Observable<Score[]> {
+  getScores(nScores = 15): Observable<Score[]> {
     return this.http.get<Score[]>(`${environment.url_backend}/game?nScores=${nScores}`);
   }
 }

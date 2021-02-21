@@ -17,6 +17,16 @@ export class ScoretableComponent implements OnInit {
       { name: '_' },
       { name: '_' },
       { name: '_' },
+      { name: '_' },
+      { name: '_' },
+      { name: '_' },
+      { name: '_' },
+      { name: '_' },
+      { name: '_' },
+      { name: '_' },
+      { name: '_' },
+      { name: '_' },
+      { name: '_' },
     ];
 
     this.gameService.getScores().subscribe(scores => {
@@ -30,7 +40,7 @@ export class ScoretableComponent implements OnInit {
   }
 
   private fillScores(): void {
-    const diff = 5 - this.scores.length;
+    const diff = 15 - this.scores.length;
     if (diff > 0) {
       this.scores = this.scores.concat(this.scoresDefault.slice(0, diff));
     }
