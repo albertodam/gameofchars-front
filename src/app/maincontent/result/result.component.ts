@@ -33,13 +33,9 @@ export class ResultComponent implements OnInit {
         this.multiplayer = true;
         const result = atob(params.mr);
         const resultGame = JSON.parse(result) as Game;
-        this.scoreBoard = resultGame.players; 
-        // this.socketService.socket.on('playerFinishedRound', (game: Game) => {
-        //   console.log(game);
-        //   this.players = game.players.sort((player1, player2) => {
-        //     return player1.score > player2.score ? -1 : 1;
-        //   });
-        // });
+        this.scoreBoard = resultGame.players.sort((player1: Player, player2: Player) => {
+          return player1.score > player2.score ? -1 : 1;
+        });
       } else {
         this.singlePlayerResult();
       }
