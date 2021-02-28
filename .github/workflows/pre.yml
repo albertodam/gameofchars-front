@@ -16,6 +16,7 @@ jobs:
           node-version: 12.x
       - run : npm install
       - run: npm run build:pre
+      - run: npm run test
       - name: Deploy to netlify
         uses: netlify/actions/cli@master
         env:

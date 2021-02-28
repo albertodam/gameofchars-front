@@ -6,7 +6,7 @@
         <a href="https://twitter.es/_albertot_" target="_blank"><i class="fab fa-twitter"></i></a>
         <a href="https://twitch.tv/albertot_dev" target="_blank"><i class="fab fa-twitch"></i></a>       
         <a *ngIf="userLogged" (click)="logout()"><i class="fas fa-sign-out-alt"></i></a>
-        <span *ngIf="!userLogged" class="login-github" (click)="loginGithub()"><i class="fab fa-github"></i> Login Github</span>
+        <span *ngIf="!userLogged" class="login-github" (click)="loginGithub()"><i class="fab fa-github"></i> Login con Github</span>
         <div *ngIf="userLogged" class="user-info">
 
             <img id="user-avatar" [src]="userLogged.avatar" />
