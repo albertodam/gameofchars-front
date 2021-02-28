@@ -1,0 +1,20 @@
+name: Pre-production workflow
+
+on:
+  push:
+    branches:
+      - pre
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: action/checkout@v1
+      - name: Install Node.js 12.x
+        uses: action/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: Install npm dependencies
+      - run : npm install
+      - name: Compile Angular app
+      - run: npm run build:pre

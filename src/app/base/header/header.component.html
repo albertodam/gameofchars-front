@@ -9,7 +9,7 @@
         <span *ngIf="!userLogged" class="login-github" (click)="loginGithub()"><i class="fab fa-github"></i> Login Github</span>
         <div *ngIf="userLogged" class="user-info">
 
-            <img [src]="userLogged.avatar" />
+            <img id="user-avatar" [src]="userLogged.avatar" />
             <span>{{userLogged.username}}</span>
 
         </div>
