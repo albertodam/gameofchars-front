@@ -16,3 +16,11 @@ jobs:
           node-version: 12.x
       - run : npm install
       - run: npm run build:pre
+      - name: Deploy to netlify
+        uses: netlify/actions/cli@master
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.PRE_NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.PRE_NETLIFY_SITE_ID }}
+        with:
+          args: deploy --dir=dist/gameofchars-front --prod
+          secrets: '["PRE_NETLIFY_AUTH_TOKEN", "PRE_NETLIFY_SITE_ID"]'
