@@ -15,5 +15,4 @@ jobs:
         with:
           node-version: 12.x
       - run : npm install
-      - name: Compile Angular app
       - run: npm run build:pre
