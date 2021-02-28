@@ -14,7 +14,5 @@ jobs:
         uses: action/setup-node@v1
         with:
           node-version: 12.x
-      - name: Install npm dependencies
       - run: npm install
-      - name: Compile Angular app
       - run: npm run build:pre
